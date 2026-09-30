@@ -72,13 +72,10 @@ int main() {
 ### Output Unguided 1 :
 
 ##### Output 1
-![Screenshot Output Unguided 1_1](https://github.com/(username github kalian)/(nama repository github kalian)/blob/main/(path folder menyimpan screenshot output)/(nama file screenshot output).png)
-
-contoh :
-![Screenshot Output Unguided 1_1](https://github.com/DhimazHafizh/2311102151_Muhammad-Dhimas-Hafizh-Fathurrahman/blob/main/Pertemuan1_Modul1/Output-Unguided1-1.png)
+https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/Unguided/Unguided%201/Screenshot%202026-09-30%20114718.png
 
 ##### Output 2
-![Screenshot Output Unguided 1_2](https://github.com/(username github kalian)/(nama repository github kalian)/blob/main/(path folder menyimpan screenshot output)/(nama file screenshot output).png)
+https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/Unguided/Unguided%201/Screenshot%202026-09-30%20114730.png
 
 penjelasan unguided 1 
 sebuah program yang menginputkan angka pertama dan angka kedua dalam proses aritmatika
@@ -139,13 +136,10 @@ int main() {
 ### Output Unguided 2 :
 
 ##### Output 1
-![Screenshot Output Unguided 2_1](https://github.com/(username github kalian)/(nama repository github kalian)/blob/main/(path folder menyimpan screenshot output)/(nama file screenshot output).png)
-
-contoh :
-![Screenshot Output Unguided 2_1](https://github.com/DhimazHafizh/2311102151_Muhammad-Dhimas-Hafizh-Fathurrahman/blob/main/Pertemuan1_Modul1/Output-Unguided2-1.png)
+https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/Unguided/Unguided%202/Screenshot%202026-09-30%20195642.png
 
 ##### Output 2
-![Screenshot Output Unguided 2_2](https://github.com/(username github kalian)/(nama repository github kalian)/blob/main/(path folder menyimpan screenshot output)/(nama file screenshot output).png)
+https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/Unguided/Unguided%202/Screenshot%202026-09-30%20195648.png
 
 penjelasan unguided 2
 Sebuah program yang mengubah angka menjadi huruf
@@ -185,13 +179,10 @@ int main() {
 ### Output Unguided 3 :
 
 ##### Output 1
-![Screenshot Output Unguided 3_1](https://github.com/(username github kalian)/(nama repository github kalian)/blob/main/(path folder menyimpan screenshot output)/(nama file screenshot output).png)
-
-contoh :
-![Screenshot Output Unguided 3_1](https://github.com/DhimazHafizh/2311102151_Muhammad-Dhimas-Hafizh-Fathurrahman/blob/main/Pertemuan1_Modul1/Output-Unguided3-1.png)
+https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/Unguided/Unguided%203/Screenshot%202026-09-30%20200242.png
 
 ##### Output 2
-![Screenshot Output Unguided 3_2](https://github.com/(username github kalian)/(nama repository github kalian)/blob/main/(path folder menyimpan screenshot output)/(nama file screenshot output).png)
+https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/Unguided/Unguided%203/Screenshot%202026-09-30%20200252.png
 
 penjelasan unguided 3
 Sebuah program  yang membentuk pola angka dengan dua sisi: angka menurun di kiri, tanda * di tengah, dan angka menaik dikanan; setiap baris makin menjorok ke kanan
