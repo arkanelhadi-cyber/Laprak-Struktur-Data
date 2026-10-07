@@ -383,12 +383,10 @@ int main() {
 ### Output Unguided 1 :
 
 ##### Output 1
-https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/Unguided/Unguided%201/Screenshot%202026-09-30%20114718.png
+https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/WEEK%202/Laprak%20W2/Unguided%201/Screenshot%202026-10-07%20113108.png
 
-##### Output 2
-https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/Unguided/Unguided%201/Screenshot%202026-09-30%20114730.png
 
-penjelasan unguided 1 
+### penjelasan unguided 1 
 Program mengimplementasikan Array 2D untuk menghitung matriks 3x3. Operasi penjumlahan dan pengurangan dihitung elemen per elemen, sedangkan perkalian matriks menggunakan tiga tingkatan perulangan (nested loop) untuk mengalikan baris matriks A dengan kolom matriks B
 
 ### 2. Berdasarkan guided pointer dan reference sebelumnya, buatlah keduanya dapat menukar nilai dari 3 variabel
@@ -452,10 +450,10 @@ int main() {
 ### Output Unguided 2 :
 
 ##### Output 1
-https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/Unguided/Unguided%202/Screenshot%202026-09-30%20195642.png
+https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/WEEK%202/Laprak%20W2/Unguided%202/Pointer/Screenshot%202026-10-07%20193647.png
 
 ##### Output 2
-https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/Unguided/Unguided%202/Screenshot%202026-09-30%20195648.png
+https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/WEEK%202/Laprak%20W2/Unguided%202/Reference/Screenshot%202026-10-07%20193723.png
 
 penjelasan unguided 2
 Program ini melakukan penukaran posisi nilai 3 variabel (a, b, c) secara berputar menggunakan fungsi dengan perantara pointer (*) dan reference (&), sehingga nilai pada variabel di main() langsung berubah.
@@ -566,7 +564,7 @@ int main() {
 ### Output Unguided 3 :
 
 ##### Output 1
-https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/Unguided/Unguided%203/Screenshot%202026-09-30%20200242.png
+https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/WEEK%202/Laprak%20W2/Unguided%203/Screenshot%202026-10-07%20194228.png
 
 ### penjelasan unguided 3
 Program ini mengelola data array 1 dimensi menggunakan mwnu switch-case. Perhitungan nilai minimum dan maksimum dikembalikan melalui fungsi cariMinimum() dan cariMaksimum(), sedangkan pencetakan array dan perhitungan rata-rata dilakukan melalui prosedur
