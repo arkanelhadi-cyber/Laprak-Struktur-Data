@@ -1,4 +1,4 @@
-# <h1 align="center">Laporan Praktikum Modul 1 - Codeblocks IDE & Pengenalan Bahas C++ (Bagian Pertama)</h1>
+# <h1 align="center">Modul 2 PENGENALAN BAHASA C++ (BAGIAN KEDUA)</h1>
 <p align="center">Hably Arkan El Hady -109082500204 </p>
 
 ## Dasar Teori
