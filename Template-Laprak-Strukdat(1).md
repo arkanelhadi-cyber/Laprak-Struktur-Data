@@ -192,8 +192,7 @@ int main() {
 ### Output Unguided 1 :
 
 ##### Output 1
-https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/WEEK%202/Laprak%20W2/Unguided%201/Screenshot%202026-10-07%20113108.png
-
+https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/WEEK%203/UNGUIDED/No%201/Screenshot%202026-10-12%20141009.png
 
 ### penjelasan unguided 1 
 Program ini berfungsi untuk mengelola data nilai mahasiswa, mulai dari menginput data mahasiswa, menghitung nilai akhir berdasarkan bobot UTS, UAS, dan tugas, hingga menampilkan daftar mahasiswa beserta nilai akhirnya.
@@ -252,13 +251,10 @@ int main() {
 ### Output Unguided 2 :
 
 ##### Output 1
-https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/WEEK%202/Laprak%20W2/Unguided%202/Pointer/Screenshot%202026-10-07%20193647.png
-
-##### Output 2
-https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/WEEK%202/Laprak%20W2/Unguided%202/Reference/Screenshot%202026-10-07%20193723.png
+https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/WEEK%203/UNGUIDED/No%202/Screenshot%202026-10-12%20141300.png
 
 penjelasan unguided 2
-Program ini melakukan penukaran posisi nilai 3 variabel (a, b, c) secara berputar menggunakan fungsi dengan perantara pointer (*) dan reference (&), sehingga nilai pada variabel di main() langsung berubah.
+Program ini berfungsi untuk membuat dan menampilkan data pelajaran menggunakan tipe data bentukan `struct`, dengan menyimpan nama mata pelajaran dan kode pelajaran melalui fungsi `create_pelajaran()` serta menampilkannya menggunakan fungsi `tampil_pelajaran()`.
 
 ### 3. Buatlah program dengan ketentuan : 
 -2 buah array 2D integer berukuran 3x3 dan 2 buah pointer integer 
@@ -318,7 +314,7 @@ int main() {
 ### Output Unguided 3 :
 
 ##### Output 1
-https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/WEEK%202/Laprak%20W2/Unguided%203/Screenshot%202026-10-07%20194228.png
+https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/WEEK%203/UNGUIDED/No%202/Screenshot%202026-10-12%20141300.png
 
 ### penjelasan unguided 3
 Program ini berfungsi untuk menampilkan array dua dimensi berukuran 3×3, menukar elemen pada posisi tertentu antara dua array, serta menukar nilai variabel menggunakan pointer dalam bahasa C++.
