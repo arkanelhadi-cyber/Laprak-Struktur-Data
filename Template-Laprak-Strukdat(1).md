@@ -8,18 +8,26 @@ Definisi type dari sebuah ADT dapat mengandung sebuah definisi ADT lain. Misalny
 1.ADT waktu yang terdiri dari dari ADT JAM dan ADT DATE
 2.Garis terdiri dari dua buah ADT POINT
 
-Segi4 yang terdiri dari pasangan dua buah POINT (Top, Left) dan (Bottom,Right)
+Segi 4 yang terdiri dari pasangan dua buah POINT (Top, Left) dan (Bottom,Right)
 
 TYPE  diterjemahkan menjadi type terdefinisi dalam bahasa yang bersangkutan. Jika dalam bahasa C menggunakan struct PRIMITIF, dalam konteks prosedural, diterjemahkan menjadi fungsi atau prosedur. PRIMITIF dikelompokan menjadi: 
 
-1.Konstruktor/Kreator, pemebentuk nilai type.Semua objek (variabel) bertype tersebut harus melalui konstruktor. Biasanya namanya diawali Make. 
+1.Konstruktor/Kreator, pemebentuk nilai type.Semua objek (variabel) bertype tersebut harus melalui konstruktor. Biasanya namanya diawali Make.
+
 2.Selector, untuk mengakses tipe komponen(biasanya namanya diawali Get).
+
 3.Prosedur pengubah nilai komponen (biasanya namanya diawali Get). 
+
 4.Tipe validator komponen, yang dipakai untuk mentest apakah dapat membentuk tipe sesuai dengan batasan
+
 5.Destruktor/Dealokator yaitu untuk “menghancurkan” nilai objek/variabel (sekaligus memori penyimpanannya).
+
 6.Baca/Tulis, untuk interface dengan input/output device.
+
 7.Operator relasional, terhadap tipe tersebut untuk mendefinisikan lebih besar, lebih kecil, sama dengan dan sebagainya.
+
 8.Aritmatika terhadap tipe tersebut, karena biasanya aritmatika dalam bahasa C hanya terdefinisi untuk bilangan numerik.
+
 9.Konversi dari tipe tersebut ke tipe dasar dan sebaliknya
 
 ADT biasanya diimplementasikan menjadi dua buah modul utama dan 1 modul interface program utama (driver). Dua modul tersebut adalah sebagai berikut: 
@@ -67,7 +75,7 @@ float hitungNilaiAkhir(float uts, float uas, float tugas);
 void inputMhs(mahasiswa &m);
 void tampilMhs(mahasiswa m);
 
-#endif // MAHASISWA_H_INCLUDED
+#endif 
 ```
 penjelasan singkat guided 1
 Program ini berfungsi sebagai file header yang mendefinisikan struktur data mahasiswa serta deklarasi fungsi untuk menginput, menghitung, dan menampilkan data mahasiswa.
