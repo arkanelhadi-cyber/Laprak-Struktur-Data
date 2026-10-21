@@ -551,7 +551,7 @@ int main() {
 ### Output Unguided 1 :
 
 ##### Output 1
-https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/WEEK%203/UNGUIDED/No%201/Screenshot%202026-10-12%20141009.png
+https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/WEEK%204/unguided/NO%201/Screenshot%202026-10-21%20224803.png
 
 ### penjelasan unguided 1 
 Program ini berfungsi untuk mengimplementasikan struktur data Single Linked List menggunakan C++ dengan tipe data integer, yang mencakup pembuatan list, penambahan node di awal, penghapusan node pertama dan terakhir, penampilan isi list, penghitungan jumlah node, serta penghapusan seluruh node.
