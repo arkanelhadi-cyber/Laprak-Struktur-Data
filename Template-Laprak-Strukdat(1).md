@@ -1,31 +1,9 @@
-# <h1 align="center">Modul 4  SINGLY LINKED LIST (BAGIAN PERTAMA)  </h1>
+# <h1 align="center">Modul 7 - STACK  </h1>
 <p align="center">Hably Arkan El Hady -109082500204 </p>
 
 ## Dasar Teori
-Linked list (biasa disebut list saja) adalah salah satu bentuk struktur data (representasi penyimpanan) berupa serangkaian elemen data yang saling berkait (berhubungan) dan bersifat fleksibel karena dapat tumbuh dan mengerut sesuai kebutuhan. Data yang disimpan dalam Linked list bisa berupa data tunggal atau data majemuk. Data tunggal merupakan data yang hanya terdiri dari satu data (variabel), misalnya: nama bertipe string. Sedangkan data majemuk  merupakan sekumpulan data (record) yang di dalamnya terdiri dari berbagai tipe data, misalnya: Data Mahasiswa, terdiri dari Nama bertipe string, NIM bertipe long integer, dan Alamat bertipe string.  Linked list dapat diimplementasikan menggunakan Array dan Pointer (Linked list). Yang akan kita gunakan adalah pointer, karena beberapa alasan, yaitu : 
- 1. Array bersifat statis, sedangkan pointer dinamis. 
- 2. Pada linked list bentuk datanya saling bergandengan (berhubungan) sehingga lebih mudah memakai pointer. 
- 3. Sifat linked list yang fleksibel lebih cocok dengan sifat pointer yang dapat diatur sesuai kebutuhan. 
- 4. Karena array lebih susah dalam menangani linked list, sedangkan pointer lebih mudah
- 5. Array lebih cocok pada kumpulan data yang jumlah elemen maksimumnya sudah diketahui dari awal. 
+Stack adalah struktur data linear yang bekerja berdasarkan prinsip LIFO (Last In First Out), yaitu data yang terakhir masuk akan dikeluarkan terlebih dahulu[1]. Contohnya seperti tumpukan buku, buku yang terakhir ditaruh di atas akan diambil lebih dulu. Dalam pemrograman, stack sering dipakai untuk menyimpan data sementara dan memproses urutan balik[2].
 
-Dalam implementasinya, pengaksesan elemen pada Linked list dengan pointer bisa menggunakan  (->) atau tanda titik (.). Model-model dari ADT Linked list yang kita pelajari adalah : 
-1. Singly Linked list
-2. Doubly Linked list
-3. Circular Linked list
-4. Multi Linked list 
-5. Stack (Tumpukan) 
-6. Queue (Antrean)
-7. Tree 
-8. Graph
-
-Setiap model ADT Linked list di atas memiliki karakteristik tertentu dan dalam penggunaannya disesuaikan dengan kebutuhan. Secara umum operasi-operasi ADT pada Linked list, yaitu : 
-1. Penciptaan dan inisialisasi list (Create List). 
-2. Penyisipan elemen list (Insert). 
-3. Penghapusan elemen list (Delete).
-4. Penelusuran elemen list dan menampilkannya (View).
-5. Pencarian elemen list (Searching). 
-6. Pengubahan isi elemen list (Update). 
 
 ### A. ...<br/>
 ...
@@ -41,508 +19,249 @@ Setiap model ADT Linked list di atas memiliki karakteristik tertentu dan dalam p
 
 ## Guided 
 
-### 1. list.h
+### 1. stack.h
 
 ```C++
 source code guided 1
-#ifndef LIST_H
-#define LIST_H
-#define Nil NULL
+#ifndef STACK_H_INCLUDED
+#define STACK_H_INCLUDED
 
 #include <iostream>
 using namespace std;
 
-// deklarasi isi data struct mahasiswa
-struct mahasiswa {
-    string nama;
-    string nim;
-    int umur;
+struct infotype {
+    char nim[20];
+    char nama[20];
 };
 
-typedef mahasiswa dataMahasiswa;
-// memberikan nama alias dataMahasiswa untuk struct mahasiswa
-
-typedef struct node *address;
-// mendefinisikan alias address sebagai pointer ke struct node
-
-struct node {
-    // node untuk isi dari linked listnya, isi setiap node adalah data & pointer next
-    dataMahasiswa isidata;
-    address next;
+struct Stack {
+    infotype info[10];
+    int Top;
 };
 
-struct LinkedList {
-    // ini linked listnya
-    address first;
-};
+int isEmpty(Stack S);
 
-// semua function & prosedur yang akan dipakai
-bool isEmpty(LinkedList List);
-void createList(LinkedList &List);
-address alokasi(string nama, string nim, int umur);
-void dealokasi(address &node);
-void printList(LinkedList List);
-void insertFirst(LinkedList &List, address nodeBaru);
-void insertAfter(LinkedList &List, address nodeBaru, address Prev);
-void insertLast(LinkedList &List, address nodeBaru);
+void createStack(Stack &S);
 
-void delFirst(LinkedList &List);
-void delLast(LinkedList &List);
-void delAfter(LinkedList &List, address nodeHapus, address nodePrev);
-int nbList(LinkedList List);
-void deleteList(LinkedList &List);
+void push(Stack &S, infotype X);
 
-#endif
+void pop(Stack &S, infotype &X);
+
+void viewStack(Stack S);
+
+#endif 
+
 ```
 penjelasan singkat guided 1
-Program ini berfungsi sebagai file header untuk mendefinisikan struktur data Single Linked List yang menyimpan data mahasiswa, serta mendeklarasikan berbagai fungsi untuk menambah, menghapus, menghitung, dan menampilkan data dalam linked list.
-### 2. list.cpp
+Stack untuk menyimpan data mahasiswa berisi NIM dan nama. Array info[10] menyimpan data, sedangkan Top menunjukkan posisi elemen paling atas sehingga operasi push dan pop bisa dilakukan sesuai prinsip LIFO.
+
+### 2. stack.cpp
 
 ```C++
 source code guided 2
-// list.cpp
-#include "list.h"
-#include <iostream>
-using namespace std;
+#include "stack.h"
 
-// I.S = Initial State / kondisi awal
-// F.S = Final State / kondisi akhir
-
-// fungsi untuk cek apakah list kosong atau tidak
-bool isEmpty(LinkedList List) {
-    if (List.first == Nil) {
-        return true;
+int isEmpty(Stack S) {
+    if (S.Top == 0) {
+        return 0;
     } else {
-        return false;
+        return 1;
     }
 }
-
-// pembuatan linked list kosong
-void createList(LinkedList &List) {
-    /* I.S. sembarang
-       F.S. terbentuk list kosong */
-    List.first = Nil;
+void createStack(Stack &S) {
+    S.Top = 0;
 }
-
-// pembuatan node baru dengan menerapkan manajemen memori
-address alokasi(string nama, string nim, int umur) {
-    /*
-       I.S. sembarang
-       F.S. mengembalikan alamat node baru dengan isidata = sesuai parameter dan next = Nil
-    */
-    address nodeBaru = new node;
-    nodeBaru->isidata.nama = nama;
-    nodeBaru->isidata.nim = nim;
-    nodeBaru->isidata.umur = umur;
-    nodeBaru->next = Nil;
-    return nodeBaru;
-}
-
-// penghapusan node dengan menerapkan manajemen memori
-void dealokasi(address &node) {
-    /*
-       I.S. P terdefinisi
-       F.S. memori yang digunakan node dikembalikan ke sistem
-    */
-    node->next = Nil;
-    delete node;
-}
-
-// prosedur-prosedur untuk insert / menambahkan node baru ke dalam list
-void insertFirst(LinkedList &List, address nodeBaru) {
-    /*
-       I.S. sembarang, P sudah dialokasi
-       F.S. menempatkan elemen list (node) pada awal list
-    */
-    nodeBaru->next = List.first;
-    List.first = nodeBaru;
-}
-
-void insertAfter(LinkedList &List, address nodeBaru, address Prev) {
-    /*
-       I.S. sembarang, nodeBaru dan Prev adalah salah satu elemen list (node)
-       F.S. menempatkan elemen (node) sesudah elemen node Prev
-    */
-    if (Prev != Nil) {
-        nodeBaru->next = Prev->next;
-        Prev->next = nodeBaru;
+void push(Stack &S, infotype X) {
+    if (S.Top < 10) {
+        S.Top = S.Top + 1;
+        S.info[S.Top - 1] = X;
     } else {
-        cout << "Node sebelumnya tidak valid!" << endl;
+        cout << "Stack penuh, data tidak bisa ditambahkan" << endl;
     }
 }
-
-void insertLast(LinkedList &List, address nodeBaru) {
-    /*
-       I.S. sembarang, nodeBaru sudah dialokasi
-       F.S. menempatkan elemen pada akhir list
-    */
-    if (isEmpty(List)) {
-        List.first = nodeBaru;
+void pop(Stack &S, infotype &X) {
+    if (isEmpty(S) != 0) {
+        X = S.info[S.Top - 1];
+        S.Top = S.Top -1;
     } else {
-        address nodeBantu = List.first;
-
-        while (nodeBantu->next != Nil) {
-            nodeBantu = nodeBantu->next;
-        }
-
-        nodeBantu->next = nodeBaru;
+        cout << "Stack kosong, tidak ada data yang bisa diambil" << endl;
     }
 }
-
-// prosedur-prosedur untuk delete / menghapus node yang ada di dalam list
-void delFirst(LinkedList &List) {
-    /*
-       I.S. list tidak kosong
-       F.S. node pertama di list terhapus
-    */
-    address nodeHapus;
-
-    if (isEmpty(List) == false) {
-        nodeHapus = List.first;
-        List.first = List.first->next;
-        nodeHapus->next = Nil;
-        dealokasi(nodeHapus);
+void viewStack(Stack S) {
+    if (isEmpty(S) == 0) {
+        cout << "Stack Kosong" << endl; 
     } else {
-        cout << "List kosong!" << endl;
-    }
-}
-
-void delLast(LinkedList &List) {
-    /*
-       I.S. list tidak kosong
-       F.S. node terakhir di list terhapus
-    */
-    address nodeHapus, nodePrev;
-
-    if (isEmpty(List) == false) {
-        nodeHapus = List.first;
-
-        if (nodeHapus->next == Nil) {
-            List.first->next = Nil;
-            dealokasi(nodeHapus);
-            List.first = Nil;
-        } else {
-            while (nodeHapus->next != Nil) {
-                nodePrev = nodeHapus;
-                nodeHapus = nodeHapus->next;
-            }
-
-            nodePrev->next = Nil;
-            dealokasi(nodeHapus);
-        }
-    } else {
-        cout << "List kosong" << endl;
-    }
-}
-
-void delAfter(LinkedList &List, address nodeHapus, address nodePrev) {
-    /*
-       I.S. list tidak kosong, Prev alamat salah satu elemen list
-       F.S. nodeBantu adalah alamat dari Prev->next, menghapus Prev->next dari list
-    */
-    if (isEmpty(List) == true) {
-        cout << "List kosong!" << endl;
-    } else {
-        if (nodePrev != Nil && nodePrev->next != Nil) {
-            nodeHapus = nodePrev->next;
-            nodePrev->next = nodeHapus->next;
-            nodeHapus->next = Nil;
-            dealokasi(nodeHapus);
-        } else {
-            cout << "Node sebelumnya (prev) tidak valid!" << endl;
+        cout << "Isi stack (dari TOP):" << endl;
+        for (int i = S.Top; i >= 1; i--) {
+            cout << i << ". " << S.info[i - 1].nim << " - "
+                 << S.info[i - 1].nama << endl;
         }
     }
-}
-
-// prosedur untuk menampilkan isi list
-void printList(LinkedList List) {
-    /*
-       I.S. mungkin kosong
-       F.S. jika list tidak kosong menampilkan semua info yang ada pada list
-    */
-    if (isEmpty(List)) {
-        cout << "List kosong." << endl;
-    } else {
-        address nodeBantu = List.first;
-
-        while (nodeBantu != Nil) {
-            cout << "Nama : " << nodeBantu->isidata.nama
-                 << ", NIM : " << nodeBantu->isidata.nim
-                 << ", Usia : " << nodeBantu->isidata.umur
-                 << endl;
-
-            nodeBantu = nodeBantu->next;
-        }
-    }
-}
-
-// function untuk menampilkan jumlah node di dalam list
-int nbList(LinkedList List) {
-    /*
-       I.S. list sudah ada
-       F.S. menampilkan jumlah node di dalam list
-    */
-    int count = 0;
-    address nodeBantu = List.first;
-
-    while (nodeBantu != Nil) {
-        count++;
-        nodeBantu = nodeBantu->next;
-    }
-
-    return count;
-}
-
-// prosedur untuk menghapus list (menghapus semua node di dalam list)
-void deleteList(LinkedList &List) {
-    /*
-       I.S. list sudah ada
-       F.S. menghapus semua node di dalam list
-    */
-    address nodeBantu, nodeHapus;
-    nodeBantu = List.first;
-
-    while (nodeBantu != Nil) {
-        nodeHapus = nodeBantu;
-        nodeBantu = nodeBantu->next;
-        dealokasi(nodeHapus);
-    }
-
-    List.first = Nil;
-    cout << "List sudah terhapus!" << endl;
 }
 ```
 penjelasan singkat guided 2
-Program ini berfungsi untuk mengimplementasikan struktur data Single Linked List dalam bahasa C++ untuk mengelola data mahasiswa, meliputi pembuatan list, penambahan dan penghapusan node, penampilan data, penghitungan jumlah node, serta penghapusan seluruh isi list menggunakan manajemen memori dinamis.
+Fungsi createStack, push, pop, dan viewStack diimplementasikan agar stack dapat digunakan secara nyata. createStack menginisialisasi Top, push menambahkan data ke atas, pop menghapus elemen paling atas, dan viewStack menampilkan isi stack sesuai urutan LIFO.
 ### 3. Main.cpp
 
 ```C++
 source code guided 3
-// main.cpp
-#include "list.h"
 
 #include <iostream>
+#include <cstring>
+#include "stack.h"
 using namespace std;
 
 int main() {
-    LinkedList List;
-    address nodeA, nodeB, nodeC, nodeD, nodeE = Nil;
+    Stack S;
+    infotype data, hasil;
 
-    createList(List);
+    createStack(S);
+    cout << "Stack baru dibuat, Top = " << S.Top << endl;
+    viewStack(S);
 
-    dataMahasiswa mhs;
+    cout << endl << "--- Push 3 data ---" << endl;
+    strcpy(data.nim, "103112400001");
+    strcpy(data.nama, "Andi");
+    push(S, data);
 
-    nodeA = alokasi("Dhimas", "2311102151", 20);
-    nodeB = alokasi("Arvin", "2211100014", 21);
-    nodeC = alokasi("Rizal", "2311100029", 20);
-    nodeD = alokasi("Satrio", "2211102173", 21);
-    nodeE = alokasi("Joshua", "2311102133", 21);
+    strcpy(data.nim, "103112400002");
+    strcpy(data.nama, "Budi");
+    push(S, data);
 
-    insertFirst(List, nodeA);
-    insertLast(List, nodeB);
-    insertAfter(List, nodeC, nodeA);
-    insertAfter(List, nodeD, nodeC);
-    insertLast(List, nodeE);
+    strcpy(data.nim, "103112400003");
+    strcpy(data.nama, "Citra");
+    push(S, data);
+    viewStack(S);
 
-    cout << "--- ISI LIST SETELAH DILAKUKAN INSERT ---" << endl;
-    printList(List);
-    cout << "jumlah node : " << nbList(List) << endl;
-    cout << endl;
+    cout << endl << "--- Pop 1 data ---" << endl;
+    pop(S, hasil);
+    cout << "Data yang diambil: " << hasil.nim << " - " << hasil.nama << endl;
+    viewStack(S);
 
-    delFirst(List);
-    delLast(List);
-    delAfter(List, nodeD, nodeC);
-
-    cout << "--- ISI LIST SETELAH DILAKUKAN DELETE ---" << endl;
-    printList(List);
-    cout << "jumlah node : " << nbList(List) << endl;
-    cout << endl;
-
-    deleteList(List);
-
-    cout << "--- ISI LIST SETELAH DILAKUKAN HAPUS LIST ---" << endl;
-    printList(List);
-    cout << "jumlah node : " << nbList(List) << endl;
-    cout << endl;
+    cout << endl << "--- Pop sampai kosong ---" << endl;
+    pop(S, hasil);
+    pop(S, hasil);
+    pop(S, hasil);
+    viewStack(S);
 
     return 0;
 }
+
 ```
 penjelasan singkat guided 3
-Program ini berfungsi untuk menguji implementasi Single Linked List dengan membuat list data mahasiswa, melakukan penambahan dan penghapusan node, menampilkan isi serta jumlah node, dan menghapus seluruh list untuk memastikan setiap operasi berjalan sesuai fungsinya.
-
+Stack untuk menyimpan, menampilkan, dan menghapus data mahasiswa berdasarkan prinsip LIFO. Program ini juga membuktikan bahwa operasi stack dapat dibuat lebih rapi dan mudah dipahami dengan memisahkan fungsinya dalam modul yang berbeda.
 
 ## Unguided 
 
-### 1. Buatlah ADT Singly Linked list sebagai berikut di dalam file “Singlylist.h” . Kemudian buatlah implementasi dari procedure-procedure yang digunakan didalam file “Singlylist.cpp” Kemudian buat program utama didalam file “main.cpp” dengan implementasi sebagai berikut : 
-
+### 1. Stack untuk menyimpan, menampilkan, dan menghapus data mahasiswa berdasarkan prinsip LIFO. Program ini juga membuktikan bahwa operasi stack dapat dibuat lebih rapi dan mudah dipahami dengan memisahkan fungsinya dalam modul yang berbeda.
 ```C++
 source code unguided 1
-//singlylist.h
-#ifndef SINGLYLIST_H_INCLUDED
-#define SINGLYLIST_H_INCLUDED
-
-typedef int infotype;
-typedef struct ElmList *address;
-
-struct ElmList {
-    infotype info;
-    address next;
-};
-
-struct List {
-    address First;
-};
-
-void createList(List &L);
-address alokasi(infotype x);
-void dealokasi(address &P);
-void printInfo(List L);
-void insertFirst(List &L, address P);
-
-void deleteFirst(List &L, address &P);
-void deleteLast(List &L, address &P);
-int nbList(List L);
-void deleteList(List &L);
-
-#endif
-
-//singlylist.cpp
-
+//stack.h
+#ifndef STACK_H_INCLUDED
+#define STACK_H_INCLUDED
 
 #include <iostream>
-#include "Singlylist.h"
 
 using namespace std;
 
-// Membuat list kosong
-void createList(List &L) {
-    L.First = NULL;
+typedef int infotype;
+struct Stack {
+    infotype info[20];
+    int top;
+};
+
+void createStack(Stack &S);
+bool isEmpty(Stack S);
+bool isFull(Stack S);
+void push(Stack &S, infotype x);
+infotype pop(Stack &S);
+void printInfo(Stack S);
+void balikStack(Stack &S);
+
+#endif 
+
+//stack.cpp
+
+
+#include "stack.h"
+
+void createStack(Stack &S) {
+    S.top = -1;
 }
 
-// Membuat node baru
-address alokasi(infotype x) {
-    address P = new ElmList;
-    P->info = x;
-    P->next = NULL;
-    return P;
+bool isEmpty(Stack S) {
+    return S.top == -1;
 }
 
-// Menghapus node dari memori
-void dealokasi(address &P) {
-    delete P;
-    P = NULL;
+bool isFull(Stack S) {
+    return S.top == 19;
 }
 
-// Menampilkan seluruh isi list
-void printInfo(List L) {
-    address P = L.First;
-
-    while (P != NULL) {
-        cout << P->info;
-
-        if (P->next != NULL) {
-            cout << " ";
-        }
-
-        P = P->next;
+void push(Stack &S, infotype x) {
+    if (!isFull(S)) {
+        S.top++;
+        S.info[S.top] = x;
     }
+}
 
+infotype pop(Stack &S) {
+    infotype x = -1;
+    if (!isEmpty(S)) {
+        x = S.info[S.top];
+        S.top--;
+    }
+    return x;
+}
+
+void printInfo(Stack S) {
+    cout << "[TOP] ";
+    for (int i = S.top; i >= 0; i--) {
+        cout << S.info[i] << " ";
+    }
     cout << endl;
 }
 
-// Menambahkan node di awal list
-void insertFirst(List &L, address P) {
-    P->next = L.First;
-    L.First = P;
-}
-
-// Menghapus node pertama
-void deleteFirst(List &L, address &P) {
-    if (L.First != NULL) {
-        P = L.First;
-        L.First = L.First->next;
-        P->next = NULL;
-    } else {
-        P = NULL;
-    }
-}
-
-// Menghapus node terakhir
-void deleteLast(List &L, address &P) {
-    if (L.First == NULL) {
-        P = NULL;
-    } else if (L.First->next == NULL) {
-        P = L.First;
-        L.First = NULL;
-    } else {
-        address Q = L.First;
-
-        while (Q->next->next != NULL) {
-            Q = Q->next;
+void balikStack(Stack &S) {
+    if (!isEmpty(S)) {
+        Stack temp1, temp2;
+        createStack(temp1);
+        createStack(temp2);
+        
+        while (!isEmpty(S)) {
+            push(temp1, pop(S));
         }
-
-        P = Q->next;
-        Q->next = NULL;
+        
+        while (!isEmpty(temp1)) {
+            push(temp2, pop(temp1));
+        }
+        
+        while (!isEmpty(temp2)) {
+            push(S, pop(temp2));
+        }
     }
-}
-
-// Menghitung jumlah node
-int nbList(List L) {
-    int jumlah = 0;
-    address P = L.First;
-
-    while (P != NULL) {
-        jumlah++;
-        P = P->next;
-    }
-
-    return jumlah;
-}
-
-// Menghapus seluruh node
-void deleteList(List &L) {
-    address P;
-
-    while (L.First != NULL) {
-        deleteFirst(L, P);
-        dealokasi(P);
-    }
-
-    cout << "- List Berhasil Terhapus -" << endl;
 }
 
 //main.cpp
 
 
-#include <iostream>
-#include "Singlylist.h"
-
-using namespace std;
+#include "stack.h"
 
 int main() {
-    List L;
-    address P1, P2, P3, P4, P5;
-
-    createList(L);
-
-    P1 = alokasi(2);
-    insertFirst(L, P1);
-
-    P2 = alokasi(0);
-    insertFirst(L, P2);
-
-    P3 = alokasi(8);
-    insertFirst(L, P3);
-
-    P4 = alokasi(12);
-    insertFirst(L, P4);
-
-    P5 = alokasi(9);
-    insertFirst(L, P5);
-
-    printInfo(L);
-
+    cout << "Hello world!" << endl;
+    Stack S;
+    createStack(S);
+    push(S, 3);
+    push(S, 4);
+    push(S, 8);
+    pop(S);
+    push(S, 2);
+    push(S, 3);
+    pop(S);
+    push(S, 9);
+    printInfo(S);
+    cout << "balik stack" << endl;
+    balikStack(S);
+    printInfo(S);
     return 0;
 }
 
@@ -551,134 +270,295 @@ int main() {
 ### Output Unguided 1 :
 
 ##### Output 1
-https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/WEEK%204/unguided/NO%201/Screenshot%202026-10-21%20224803.png
+https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/WEEK%207/UNGUIDED/UNGUIDED%201/Screenshot%202026-11-18%20230652.png
 
 ### penjelasan unguided 1 
-Program ini berfungsi untuk mengimplementasikan struktur data Single Linked List menggunakan C++ dengan tipe data integer, yang mencakup pembuatan list, penambahan node di awal, penghapusan node pertama dan terakhir, penampilan isi list, penghitungan jumlah node, serta penghapusan seluruh node.
+Stack untuk menyimpan data mahasiswa berisi NIM dan nama. Array info[10] menyimpan data, sedangkan Top menunjukkan posisi elemen paling atas sehingga operasi push dan pop bisa dilakukan sesuai prinsip LIFO.
 
-### 2. Dari soal Latihan pertama, lakukan penghapusan node 9 menggunakan deleteFirst(), node 2 menggunakan deleteLast(), dan node 8 menggunakan deleteAfter(). Kemudian tampilkan jumlah node yang tersimpan menggunakan nbList() dan lakukan penghapusan seluruh node menggunakan deleteList(). Output yang diharapkan : 
+### 2. Tambahkan prosedur pushAscending( in/out S : Stack, in x : integer)
 ```C++
 source code unguided 2
-//singlylist.cpp
+//stack.h
+
+#ifndef STACK_H_INCLUDED
+#define STACK_H_INCLUDED
 
 #include <iostream>
+
 using namespace std;
 
-struct Node {
-    int info;
-    Node* next;
+typedef int infotype;
+struct Stack {
+    infotype info[20];
+    int top;
 };
 
-typedef Node* address;
+void createStack(Stack &S);
+bool isEmpty(Stack S);
+bool isFull(Stack S);
+void push(Stack &S, infotype x);
+infotype pop(Stack &S);
+void printInfo(Stack S);
+void balikStack(Stack &S);
+void pushAscending(Stack &S, infotype x);
 
-struct List {
-    address first;
-};
+#endif 
 
-void createList(List &L) {
-    L.first = nullptr;
+//stack.cpp
+#include "stack.h"
+
+void createStack(Stack &S) {
+    S.top = -1;
 }
 
-void insertLast(List &L, int nilai) {
-    address P = new Node;
-    P->info = nilai;
-    P->next = nullptr;
+bool isEmpty(Stack S) {
+    return S.top == -1;
+}
 
-    if (L.first == nullptr) {
-        L.first = P;
-    } else {
-        address Q = L.first;
-        while (Q->next != nullptr) {
-            Q = Q->next;
+bool isFull(Stack S) {
+    return S.top == 19;
+}
+
+void push(Stack &S, infotype x) {
+    if (!isFull(S)) {
+        S.top++;
+        S.info[S.top] = x;
+    }
+}
+
+infotype pop(Stack &S) {
+    infotype x = -1;
+    if (!isEmpty(S)) {
+        x = S.info[S.top];
+        S.top--;
+    }
+    return x;
+}
+
+void printInfo(Stack S) {
+    cout << "[TOP] ";
+    for (int i = S.top; i >= 0; i--) {
+        cout << S.info[i] << " ";
+    }
+    cout << endl;
+}
+
+void balikStack(Stack &S) {
+    if (!isEmpty(S)) {
+        Stack temp1, temp2;
+        createStack(temp1);
+        createStack(temp2);
+        
+        while (!isEmpty(S)) {
+            push(temp1, pop(S));
         }
-        Q->next = P;
+        while (!isEmpty(temp1)) {
+            push(temp2, pop(temp1));
+        }
+        while (!isEmpty(temp2)) {
+            push(S, pop(temp2));
+        }
     }
 }
 
-void deleteFirst(List &L) {
-    if (L.first != nullptr) {
-        address P = L.first;
-        L.first = P->next;
-        delete P;
-    }
-}
-
-void deleteLast(List &L) {
-    if (L.first == nullptr) return;
-
-    if (L.first->next == nullptr) {
-        delete L.first;
-        L.first = nullptr;
+void pushAscending(Stack &S, infotype x) {
+    if (isFull(S)) {
         return;
     }
-
-    address P = L.first;
-    while (P->next->next != nullptr) {
-        P = P->next;
-    }
-
-    delete P->next;
-    P->next = nullptr;
-}
-
-void deleteAfter(List &L, address Prec) {
-    if (Prec != nullptr && Prec->next != nullptr) {
-        address P = Prec->next;
-        Prec->next = P->next;
-        delete P;
-    }
-}
-
-int nbList(List L) {
-    int jumlah = 0;
-    address P = L.first;
-
-    while (P != nullptr) {
-        jumlah++;
-        P = P->next;
-    }
-
-    return jumlah;
-}
-
-void deleteList(List &L) {
-    while (L.first != nullptr) {
-        deleteFirst(L);
-    }
-}
-
-int main() {
-    List L;
-    createList(L);
-
     
-    for (int i = 1; i <= 12; i++) {
-        insertLast(L, i);
+    Stack temp;
+    createStack(temp);
+    
+    while (!isEmpty(S) && S.info[S.top] < x) {
+        push(temp, pop(S));
     }
-
-    cout << "Jumlah node : " << nbList(L) << endl;
-
-    deleteList(L);
-
-    cout << "\n- List Berhasil Terhapus -" << endl;
-    cout << "Jumlah node : " << nbList(L) << endl;
-
-    return 0;
+    
+    push(S, x);
+    
+    while (!isEmpty(temp)) {
+        push(S, pop(temp));
+    }
 }
+
+//main.cpp
+
+#ifndef STACK_H_INCLUDED
+#define STACK_H_INCLUDED
+
+#include <iostream>
+
+using namespace std;
+
+typedef int infotype;
+struct Stack {
+    infotype info[20];
+    int top;
+};
+
+void createStack(Stack &S);
+bool isEmpty(Stack S);
+bool isFull(Stack S);
+void push(Stack &S, infotype x);
+infotype pop(Stack &S);
+void printInfo(Stack S);
+void balikStack(Stack &S);
+void pushAscending(Stack &S, infotype x);
+
+#endif 
 ```
 ### Output Unguided 2 :
 
 ##### Output 1
-https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/WEEK%203/UNGUIDED/No%202/Screenshot%202026-10-12%20141300.png
+https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/WEEK%207/UNGUIDED/UNGUIDED%202/Screenshot%202026-11-18%20230907.png
 
-penjelasan unguided 2
-Program ini berfungsi untuk mengimplementasikan struktur data Single Linked List menggunakan C++ dengan operasi pembuatan list, penambahan node di akhir, penghapusan node pertama, terakhir, dan setelah node tertentu, serta penghitungan jumlah node dan penghapusan seluruh isi list.
+### penjelasan unguided 2
+Stack digunakan untuk memasukkan data dengan prosedur pushAscending agar urutan data tetap naik. Setelah semua data masuk, fungsi balikStack dipanggil untuk membalik isi stack sehingga program dapat menampilkan urutan yang berbeda dari susunan awal.
+
+### 3. Tambahkan prosedur getInputStream( in/out S : Stack ). Prosedur akan terus membaca dan menerima input user dan memasukkan setiap input ke dalam stack hingga user menekan tombol enter. Contoh: gunakan cin.get() untuk mendapatkan inputan user.
+```C++
+source code unguided 2
+//stack.h
+#ifndef STACK_H_INCLUDED
+#define STACK_H_INCLUDED
+
+#include <iostream>
+
+using namespace std;
+
+typedef int infotype;
+struct Stack {
+    infotype info[20];
+    int top;
+};
+
+void createStack(Stack &S);
+bool isEmpty(Stack S);
+bool isFull(Stack S);
+void push(Stack &S, infotype x);
+infotype pop(Stack &S);
+void printInfo(Stack S);
+void balikStack(Stack &S);
+void pushAscending(Stack &S, infotype x);
+void getInputStream(Stack &S);
+
+#endif 
+
+//stack.cpp
+
+#include "stack.h"
+
+void createStack(Stack &S) {
+    S.top = -1;
+}
+
+bool isEmpty(Stack S) {
+    return S.top == -1;
+}
+
+bool isFull(Stack S) {
+    return S.top == 19;
+}
+
+void push(Stack &S, infotype x) {
+    if (!isFull(S)) {
+        S.top++;
+        S.info[S.top] = x;
+    }
+}
+
+infotype pop(Stack &S) {
+    infotype x = -1;
+    if (!isEmpty(S)) {
+        x = S.info[S.top];
+        S.top--;
+    }
+    return x;
+}
+
+void printInfo(Stack S) {
+    cout << "[TOP] ";
+    for (int i = S.top; i >= 0; i--) {
+        cout << S.info[i] << " ";
+    }
+    cout << endl;
+}
+
+void balikStack(Stack &S) {
+    if (!isEmpty(S)) {
+        Stack temp1, temp2;
+        createStack(temp1);
+        createStack(temp2);
+        
+        while (!isEmpty(S)) {
+            push(temp1, pop(S));
+        }
+        while (!isEmpty(temp1)) {
+            push(temp2, pop(temp1));
+        }
+        while (!isEmpty(temp2)) {
+            push(S, pop(temp2));
+        }
+    }
+}
+
+void pushAscending(Stack &S, infotype x) {
+    if (isFull(S)) {
+        return;
+    }
+    Stack temp;
+    createStack(temp);
+    while (!isEmpty(S) && S.info[S.top] < x) {
+        push(temp, pop(S));
+    }
+    push(S, x);
+    while (!isEmpty(temp)) {
+        push(S, pop(temp));
+    }
+}
+
+void getInputStream(Stack &S) {
+    char c;
+    while (cin.get(c) && c != '\n') {
+        if (c >= '0' && c <= '9') {
+            infotype x = c - '0'; 
+            push(S, x);
+        }
+    }
+}
+
+//main.cpp
+
+#include "stack.h"
+
+int main() {
+    cout << "Hello world!" << endl;
+    
+    cin.ignore(); 
+    
+    Stack S;
+    createStack(S);
+    getInputStream(S);
+    printInfo(S);
+    cout << "balik stack" << endl;
+    balikStack(S);
+    printInfo(S);
+    return 0;
+}
+
+### Output Unguided 3 :
+
+##### Output 1:
+https://github.com/arkanelhadi-cyber/Laprak-Struktur-Data/blob/main/WEEK%207/UNGUIDED/UNGUIDED%203/Screenshot%202026-11-18%20233238.png
+
+### penjelasan unguided 3
+Program membaca input angka dari user dan menyimpannya ke stack sampai tombol enter ditekan. Data tersebut kemudian ditampilkan dan dibalik dengan fungsi balikStack, sehingga terlihat bahwa stack mengikuti prinsip LIFO dalam proses penyimpanan dan pengolahan data.
+
 
 
 ## Kesimpulan
 Kesimpulan:
 
-Berdasarkan kedua program Single Linked List tersebut, dapat disimpulkan bahwa struktur data linked list digunakan untuk menyimpan dan mengelola data secara dinamis menggunakan node yang saling terhubung melalui pointer. Kedua program menerapkan operasi dasar seperti penambahan, penghapusan, dan penghitungan jumlah node. Perbedaannya terletak pada implementasi fungsi dan cara penambahan data, yaitu program pertama menambahkan node di awal list, sedangkan program kedua menambahkan node di akhir list.
+Stack adalah struktur data yang bekerja berdasarkan prinsip LIFO, yaitu data yang terakhir masuk akan keluar terlebih dahulu. Praktikum ini membuktikan bahwa operasi push, pop, dan view pada stack dapat diimplementasikan secara sederhana menggunakan array, serta dapat dimodifikasi untuk kebutuhan tertentu seperti membalik urutan data atau menyusun data secara terurut.
 
 ## Referensi
 [1] Triase. (2020). Diktat Edisi Revisi : STRUKTUR DATA. Medan: UNIVERSTAS ISLAM NEGERI SUMATERA UTARA MEDAN. 
